@@ -16,18 +16,25 @@ const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-let i = randomIntegerFromInterval();
 let timerId = null;
 
-refs.btnStart.addEventListener("click", () => {
+function onClick() {
+  let i = colors.length - 1;
+
   timerId = setInterval(() => {
-    i = i < colors.length ? (i += 1) : 0;
-    document.body.style.background = colors[i];
-    refs.btnStart.setAttribute("disabled", true);
+    let index = randomIntegerFromInterval(0, i);
+    document.body.style.background = `${colors[index]}`;
+   
+    if (timerId != 0) {
+      refs.btnStart.removeEventListener("click", onClick);
+      
+    }
   }, 1000);
-});
+}
+
+refs.btnStart.addEventListener("click", onClick);
 
 refs.btnStop.addEventListener("click", () => {
   clearInterval(timerId);
-  refs.btnStart.removeAttribute("disabled");
+ 
 });
