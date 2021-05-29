@@ -24,10 +24,9 @@ function onClick() {
   timerId = setInterval(() => {
     let index = randomIntegerFromInterval(0, i);
     document.body.style.background = `${colors[index]}`;
-   
+
     if (timerId != 0) {
       refs.btnStart.removeEventListener("click", onClick);
-      
     }
   }, 1000);
 }
@@ -36,5 +35,5 @@ refs.btnStart.addEventListener("click", onClick);
 
 refs.btnStop.addEventListener("click", () => {
   clearInterval(timerId);
- 
+  refs.btnStart.addEventListener("click", onClick);
 });
